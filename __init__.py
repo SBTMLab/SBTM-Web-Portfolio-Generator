@@ -60,7 +60,7 @@ while filename :
 
 projects = env.get_template('projects.html')
 
-projectshtml = projects.render(pieces = pieces).encode('utf-8')
+projectshtml = projects.render(pieces = pieces ).encode('utf-8')
 
 
 project = env.get_template('project-details.html')
@@ -71,11 +71,13 @@ if os.path.isdir(u"./result"):
 shutil.copytree(u"./static","./result")
 
 for pc in pieces :
-	ph = project.render(piece = pc , otherpieces = pieces).encode('utf-8')
+	ph = project.render(piece = pc , otherprojects = pieces).encode('utf-8')
 	f = open(u"./result/"+pc['page'], 'w') 
 	f.write(ph)
 	f.close()
 
+contact = env.get_template('contact.html')
+contacthtml = contact.render().encode('utf-8')
 
 
 f = open(u"./result/index.html", 'w') 
@@ -83,5 +85,9 @@ f.write(indexhtml)
 f.close()
 f = open(u"./result/projects.html", 'w') 
 f.write(projectshtml)
+f.close()
+
+f = open(u"./result/contact.html", 'w') 
+f.write(contacthtml)
 f.close()
 
