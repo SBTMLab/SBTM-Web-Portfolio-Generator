@@ -63,7 +63,7 @@
             <div class="flexslider projectdetails">
               <ul class="slides">
               {% for img in piece.imgs %}
-                <li> <img class = "fimg" src="custom/{{img}}" alt="Featured" height = "529"/> </li>
+                <li> <img class = "fimg" src="{{img['origin']}}" alt="Featured" height = "529"/> </li>
               {% endfor %}
               </ul>
             </div>
@@ -82,7 +82,7 @@
           <h2 class="clearfix"> <span class="f_left">다른 프로젝트</span> <a id="next" class="next"></a> <a id="prev" class="prev"></a> </h2>
           <div id="projects-carousel" class="project-details-caro">
           {% for project in otherprojects %}
-            <article class="grid_3 project-item"><a href="javascript:"><img src="custom/{{project.imgs[0]}}"  alt="Featured" height ="136" ></a> <span class="zoom-icon" style="bottom: 100%;"><a href="custom/{{project.imgs[0]}}" class="touch-item"></a></span> <span class="zoom-link" style="top: 100%;"><a href="{{project.page}}">더보기</a></span> <span class="zoom-bg" style="opacity: 0; "></span> </article>
+            <article class="grid_3 project-item"><a href="javascript:"><img src="{{project.imgs[0]['thumb']}}"  alt="Featured" height ="136" ></a> <span class="zoom-icon" style="bottom: 100%;"><a href="{{project.imgs[0]['origin']}}" class="touch-item"></a></span> <span class="zoom-link" style="top: 100%;"><a href="{{project.page}}">더보기</a></span> <span class="zoom-bg" style="opacity: 0; "></span> </article>
           {% endfor %}
           </div>
         </div>

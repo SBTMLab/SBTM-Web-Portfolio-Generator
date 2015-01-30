@@ -71,7 +71,7 @@
 
             {% for piece in pieces %}
             {% for img in piece.imgs %}
-            <article class="grid_3 project-item alpha {{piece.tag}}"> <a href="#"><img src="custom/{{img}}" alt="{{img}}" height = "136"/></a> <span class="zoom-bg" style="opacity: 0; "> <span class="zoom-icon" style="bottom: 100%;"><a href="custom/{{img}}" class="touch-item"></a></span> <span class="zoom-link" style="top: 100%;"><a href="{{piece.page}}">더보기</a></span> </span> </article>
+            <article class="grid_3 project-item alpha {{piece.tag}}"> <a href="#"><img src="{{img['thumb']}}" alt="{{img['origin']}}" height = "136"/></a> <span class="zoom-bg" style="opacity: 0; "> <span class="zoom-icon" style="bottom: 100%;"><a href="{{img['origin']}}" class="touch-item"></a></span> <span class="zoom-link" style="top: 100%;"><a href="{{piece.page}}">더보기</a></span> </span> </article>
             {% endfor %}
             {% endfor %}
 

@@ -3,11 +3,16 @@
 from jinja2 import Environment, FileSystemLoader
 import os, shutil
 from openpyxl import load_workbook
+from resizer import resize
 
 
 wb = load_workbook(filename = 'sbtmwebport.xlsx')
 
 env = Environment(loader=FileSystemLoader(u'./templates'))
+
+if os.path.isdir(u"./result"):
+	shutil.rmtree(u"./result")
+shutil.copytree(u"./static","./result")
 
 
 features = []
@@ -44,12 +49,13 @@ while filename :
 
 	imgs =[]
 	col = 10
-	img = projectsheet.cell(row = projectindex, column = col).value
-
-	while img :
+	img = dict(origin =projectsheet.cell(row = projectindex, column = col).value)
+	
+	while img['origin'] :
+		img["thumb"] = resize(img["origin"],"./projectimage/","./result/",940,529)
 		imgs.append(img)
 		col += 1
-		img = projectsheet.cell(row = projectindex, column = col).value
+		img = dict(origin =projectsheet.cell(row = projectindex, column = col).value)
 
 	page = tag + ".html"
 	p = dict (name = filename, tag = tag, maker = maker, year = year, objective = objective, link = link, headtext = headtext, maintext = maintext, imgs = imgs, page = page)
@@ -66,9 +72,7 @@ projectshtml = projects.render(pieces = pieces ).encode('utf-8')
 project = env.get_template('project-details.html')
 
 
-if os.path.isdir(u"./result"):
-	shutil.rmtree(u"./result")
-shutil.copytree(u"./static","./result")
+
 
 for pc in pieces :
 	ph = project.render(piece = pc , otherprojects = pieces).encode('utf-8')
